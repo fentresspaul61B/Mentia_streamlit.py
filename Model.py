@@ -119,7 +119,7 @@ print(confusion_matrix(Y_test, y_pred))
 KNN Classifier
 """
 # k = np.sqrt(data.shape[0])
-k = 55
+k = 11
 print("k " + str(k))
 
 from sklearn.neighbors import KNeighborsClassifier as knn
@@ -173,11 +173,11 @@ emotion_dict = {1: "Positive", 2: "Negative", 3: "Neutral"}
 from Helper import extract_feature, load_audio, noise_reducer
 
 def make_prediction(file_path):
-  X = Helper.norm_input(file_path, MM)
-  X = pca.transform(X)
-  y_pred = KNeighborsClassifier.predict(X)
+  # X = Helper.norm_input(file_path, MM)
+  # X = pca.transform(X)
+  # y_pred = KNeighborsClassifier.predict(X)
 
 
-  # X = pd.DataFrame(extract_feature(load_audio(file_path, noise_reduce_on=True)))
-  # y_pred = model.predict(X.values)
+  X = pd.DataFrame(extract_feature(Helper.load_audio(file_path, noise_reduce_on=True))).T
+  y_pred = model.predict(X.values)
   return "This Audio is classified as speech with " + emotion_dict[y_pred[0]] + " emotion."

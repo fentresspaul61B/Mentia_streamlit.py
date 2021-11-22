@@ -141,7 +141,7 @@ from IPython.core.display import display as audio_display
 # This function is to normalize an audio input
 def norm_input(file_path, min_max):
   # audio, sr = librosa.load(file_path, sr=8000)
-  audio = load_audio(file_path)
+  audio = load_audio(file_path, noise_reduce_on=True)
   extract_features = extract_feature(audio)
   # print("My Features are: " + str(extract_features))
   new_col = []

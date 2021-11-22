@@ -24,7 +24,6 @@ matrix = pd.read_csv(paths[0]).drop("Unnamed: 0", axis=1)
 labels = pd.read_csv(paths[1])["Labels"]
 
 
-from Helper import dataset_minmax
 MM = Helper.dataset_minmax(matrix.values)
 
 
@@ -79,14 +78,14 @@ from Helper import norm_input, load_audio, play_audio
 if st.button("Record"):
     with st.spinner("Recording Your Audio..."):
     # st.write("Recording...")
-        duration = 5
+        duration = 8
         # time.sleep(duration)
 
         fs = 44000
         path_myrecording = f"./samples/{file_name}.wav"
-        my_recording = record(duration, fs)
+        my_recording = Helper.record(duration, fs)
         # my_recording = nr.reduce_noise(my_recording, sr=fs)
-        save_record(path_myrecording, my_recording, fs)
+        Helper.save_record(path_myrecording, my_recording, fs)
         features = pd.DataFrame(Model.extract_feature(Helper.load_audio(path_myrecording), MM))
         normalized_features = pd.DataFrame(Helper.norm_input(path_myrecording, MM))
     st.success("Done!")
@@ -95,7 +94,7 @@ if st.button("Record"):
     # st.write(normalized_features)
 
 
-    st.audio(read_audio(path_myrecording))
+    st.audio(Helper.read_audio(path_myrecording))
 
 
 
