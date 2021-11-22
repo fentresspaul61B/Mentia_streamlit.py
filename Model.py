@@ -35,7 +35,7 @@ from sklearn.neural_network import MLPClassifier
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 
 
-from Helper import dataset_minmax, normalize_dataset, norm_input, load_audio
+import Helper
 
 
 # MM represents the min max values. This is used to normalize the data.
@@ -55,7 +55,7 @@ seed = 9
 
 # Here is the design matrix with all of the audio features.
 # MM represents the min max values. This is used to normalize the data.
-MM = (dataset_minmax(matrix.values))
+MM = (Helper.dataset_minmax(matrix.values))
 
 # X = normalize_dataset(matrix.values, MM)
 X = matrix
@@ -86,8 +86,8 @@ print(confusion_matrix(KNN_Y_test, y_pred))
 Trying different models.
 """
 
-MM = (dataset_minmax(matrix.values))
-X = normalize_dataset(matrix.values, MM)
+MM = (Helper.dataset_minmax(matrix.values))
+X = Helper.normalize_dataset(matrix.values, MM)
 seed = 9
 Y = labels
 
@@ -173,7 +173,7 @@ emotion_dict = {1: "Positive", 2: "Negative", 3: "Neutral"}
 from Helper import extract_feature, load_audio, noise_reducer
 
 def make_prediction(file_path):
-  X = norm_input(file_path, MM)
+  X = Helper.norm_input(file_path, MM)
   X = pca.transform(X)
   y_pred = KNeighborsClassifier.predict(X)
 

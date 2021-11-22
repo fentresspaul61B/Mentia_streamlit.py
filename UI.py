@@ -3,8 +3,10 @@ import pandas as pd
 import matplotlib as plt
 import numpy as np
 import os
-from Helper import read_audio, record, save_record, extract_feature, normalize_dataset
-from Model import make_prediction
+# from Helper import read_audio, record, save_record, extract_feature, normalize_dataset
+# from Model import make_prediction
+import Helper
+import Model
 import time
 import librosa
 from IPython.core.display import display as audio_display
@@ -23,7 +25,7 @@ labels = pd.read_csv(paths[1])["Labels"]
 
 
 from Helper import dataset_minmax
-MM = dataset_minmax(matrix.values)
+MM = Helper.dataset_minmax(matrix.values)
 
 
 emotion_dict = {1: "Positive", 2: "Negative", 3: "Neutral"}
@@ -85,10 +87,10 @@ if st.button("Record"):
         my_recording = record(duration, fs)
         # my_recording = nr.reduce_noise(my_recording, sr=fs)
         save_record(path_myrecording, my_recording, fs)
-        features = pd.DataFrame(extract_feature(load_audio(path_myrecording), MM))
-        normalized_features = pd.DataFrame(norm_input(path_myrecording, MM))
+        features = pd.DataFrame(Model.extract_feature(Helper.load_audio(path_myrecording), MM))
+        normalized_features = pd.DataFrame(Helper.norm_input(path_myrecording, MM))
     st.success("Done!")
-    st.write(make_prediction(path_myrecording))
+    st.write(Model.make_prediction(path_myrecording))
     st.write(features.T)
     # st.write(normalized_features)
 
