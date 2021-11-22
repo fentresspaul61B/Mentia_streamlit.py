@@ -35,7 +35,7 @@ from sklearn.neural_network import MLPClassifier
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 
 
-import Helper
+import Helper 
 
 
 # MM represents the min max values. This is used to normalize the data.

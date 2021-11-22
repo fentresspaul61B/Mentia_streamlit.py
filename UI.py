@@ -12,6 +12,9 @@ import librosa
 from IPython.core.display import display as audio_display
 
 
+
+
+
 paths = ([
         "Audio_Features_updated_nov20.csv",
         "Labels_updated_nov20.csv",
@@ -73,8 +76,8 @@ import noisereduce as nr
 # reduced_noise = nr.reduce_noise(y=data, sr=rate)
 
 
-from Model import extract_feature
-from Helper import norm_input, load_audio, play_audio
+# from Model import extract_feature
+# from Helper import norm_input, load_audio, play_audio
 if st.button("Record"):
     with st.spinner("Recording Your Audio..."):
     # st.write("Recording...")
