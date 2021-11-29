@@ -35,7 +35,7 @@ from sklearn.neural_network import MLPClassifier
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 
 
-import Helper 
+import Helper
 
 
 # MM represents the min max values. This is used to normalize the data.
@@ -69,11 +69,11 @@ sk.utils.shuffle(X, random_state=seed)
 X_train, X_test, Y_train, Y_test = train_test_split(X,Y, test_size = .1, random_state = seed)
 
 # Instantiating the Model
-model=MLPClassifier(alpha=0.0001, batch_size=256, epsilon=1e-08, hidden_layer_sizes=(300,), learning_rate='adaptive', max_iter=500, momentum=0.7, random_state=seed)
-model.fit(X_train,Y_train)
+MLP_model=MLPClassifier(alpha=0.0001, batch_size=256, epsilon=1e-08, hidden_layer_sizes=(300,), learning_rate='adaptive', max_iter=500, momentum=0.7, random_state=seed)
+MLP_model.fit(X_train,Y_train)
 
 # Making Predictions on the Test Set
-y_pred = model.predict(X_test)
+y_pred = MLP_model.predict(X_test)
 
 # Get the classification accuracy on the test set
 KNN_Y_test = Y_test.astype('int')
@@ -119,8 +119,24 @@ print(confusion_matrix(Y_test, y_pred))
 KNN Classifier
 """
 # k = np.sqrt(data.shape[0])
+MM = (Helper.dataset_minmax(matrix.values))
+X = Helper.normalize_dataset(matrix.values, MM)
+seed = 9
+Y = labels
+
+X_train, X_test, Y_train, Y_test = train_test_split(X,Y, test_size = .1, random_state = seed)
+
+from sklearn.decomposition import PCA
+pca = PCA(n_components=131)
+
+# Fitting the PCA model to the training data
+X_train = pca.fit_transform(X_train)
+
+# transofmring the test data
+X_test = pca.transform(X_test)
+
+
 k = 11
-print("k " + str(k))
 
 from sklearn.neighbors import KNeighborsClassifier as knn
 clf = knn(n_neighbors=k)
@@ -136,48 +152,21 @@ print(confusion_matrix(KNN_Y_test, y_pred))
 
 
 
-
-
-
-
 """
 Below are helper functions that are connected to the record buton.
 
 """
-
-def extract_feature(audio, mfcc=True, chroma=True, mel=True):
-  audio = np.asarray(audio)
-  sample_rate = 8000
-  if chroma:
-    # this means we are using a short Fuorier transform to convert the
-    # data into a matrix of complex numbers.
-      stft=np.abs(librosa.stft(audio))
-
-  result=np.array([])
-  if mfcc:
-      mfccs=np.mean(librosa.feature.mfcc(y=audio, sr=sample_rate, n_mfcc=40).T, axis=0)
-  result=np.hstack((result, mfccs))
-  if chroma:
-      chroma=np.mean(librosa.feature.chroma_stft(S=stft, sr=sample_rate).T,axis=0)
-  result=np.hstack((result, chroma))
-  if mel:
-    # returns array of mel spectrogram, which is a signal that is processed to
-    # in order to match the human ear
-      mel=np.mean(librosa.feature.melspectrogram(audio, sr=sample_rate).T,axis=0)
-  result=np.hstack((result, mel))
-  return np.array(result)
-
 
 emotion_dict = {1: "Positive", 2: "Negative", 3: "Neutral"}
 
 from Helper import extract_feature, load_audio, noise_reducer
 
 def make_prediction(file_path):
-  # X = Helper.norm_input(file_path, MM)
+  X = Helper.norm_input(file_path, MM)
   # X = pca.transform(X)
   # y_pred = KNeighborsClassifier.predict(X)
 
 
-  X = pd.DataFrame(extract_feature(Helper.load_audio(file_path, noise_reduce_on=True))).T
+  # X = pd.DataFrame(extract_feature(Helper.load_audio(file_path, noise_reduce_on=True))).T
   y_pred = model.predict(X.values)
   return "This Audio is classified as speech with " + emotion_dict[y_pred[0]] + " emotion."

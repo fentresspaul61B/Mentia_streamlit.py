@@ -36,6 +36,31 @@ def record(duration=8, fs=sample_rate):
     return myrecording
 
 
+# https://pretagteam.com/question/how-do-you-record-users-audio-in-streamlit-shearing
+from IPython.display import Audio
+from ipywebrtc import CameraStream, AudioRecorder
+import time
+
+
+def record_JS(duration=8, fs=sample_rate):
+    camera = CameraStream(constraints = {
+                  'audio': True,
+                  'video': False
+               },
+               mimeType = 'audio/wav')
+    recorder = AudioRecorder(stream = camera)
+    recorder.recording = True
+    print("recording")
+    time.sleep(duration)
+    print("done")
+    recorder.recording = False
+    audio = recorder.save('test.wav')
+    return audio
+
+
+
+
+
 def save_record(path_myrecording, myrecording, fs):
     wavio.write(path_myrecording, myrecording, fs, sampwidth=2)
     return None
@@ -133,7 +158,9 @@ def play_audio(file_path):
   return audio_display(Audio(file_path))
 
 
-
+"""
+START OF MODEL HELPERS
+"""
 
 
 from IPython.core.display import display as audio_display
@@ -182,3 +209,62 @@ def normalize_dataset(dataset, minmax):
     for i in range(len(row)):
       row[i] = (row[i] - minmax[i][0]) / (minmax[i][1] - minmax[i][0])
   return dataset
+
+
+"""
+START OF EDA HELPERS
+"""
+
+
+"""
+This function creates a visualisation for the mel frequency spectrogram
+for a given audio sample.
+The inputs are a path name "audio_path", and n_mels which is the number
+of time slices to create for the given audio file.
+"""
+from IPython.display import Audio
+from IPython.core.display import display as audio_display
+
+def plot_features(audio_path, n_mels=128,n_mfcc=40, mel=True, chroma=False):
+  # test_audio_path , PNN , sample_num, table = audio_path
+  y, sr = librosa.load(audio_path)
+  librosa.feature.melspectrogram(y=y, sr=sr)
+  # n_mels is equal to how many time slices the data is chopped into.
+  # the default is 128
+  if mel:
+    S = librosa.feature.melspectrogram(y=y, sr=sr, n_mels=n_mels,
+                                        fmax=8000)
+  else:
+    S = librosa.feature.mfcc(y=y, sr=sr,n_mels=n_mels, n_mfcc=n_mfcc)
+  fig, ax = plt.subplots(figsize=(5,2))
+  if chroma:
+    S = np.abs(librosa.stft(y,))
+    chrom = librosa.feature.chroma_stft(S=S, sr=sr)
+    S_dB = chrom
+    img = librosa.display.specshow(chrom, y_axis='chroma', x_axis='time', ax=ax)
+  else:
+    S_dB = librosa.power_to_db(S, ref=np.max)
+
+    img = librosa.display.specshow(S_dB, x_axis='time',
+                          y_axis='mel', sr=sr,
+                          fmax=8000, ax=ax)
+  # fig.colorbar(img, ax=ax, format='%+2.0f dB')
+  if chroma:
+    title = "Chroma: "
+  elif mel:
+    title = "Mel: "
+  else:
+    title = "MFCC: "
+  ax.set(title= title)
+  print("Feature Shape: " +str(S_dB.shape), "Flattened Feature Shape: " +str(np.mean(S_dB.T, axis=0).shape))
+  return fig.colorbar(img, ax=ax, format='%+2.0f dB')
+
+
+# plot_mel(netural_example)
+# negative_example = play_audio(joyce_table,"path_name", 125)
+
+
+def plot_wav_file(file_path):
+    plt.figure(figsize=(12,4))
+    test_audio = librosa.load(path=file_path, sr=sample_rate)[0]
+    return librosa.display.waveplot(test_audio);
