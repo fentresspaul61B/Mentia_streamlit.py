@@ -97,7 +97,7 @@ st.write(data)
 
 # st.cache
 st.write("Number of Samples By Emotion")
-color_pallete = "Viridis"
+color_pallete = "viridis"
 
 dist_of_categories_simp = data.groupby("Emotion_string", as_index=False).count().sort_values("Data_set")
 
