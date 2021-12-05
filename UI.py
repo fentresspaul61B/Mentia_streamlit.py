@@ -810,40 +810,57 @@ st.write("""# Mentia SER Algorithm
 #     st.audio(Helper.read_audio(path_myrecording))
 
 
-import noisereduce as nr
-
-if st.button("Record"):
-    with st.spinner("Recording Your Audio..."):
-
-        duration = 4
 
 
-        fs = 44000
-        path_myrecording = f"./samples/{file_name}.wav"
-        my_recording = Helper.record(duration, fs)
-        # my_recording = Helper.record_JS(duration, fs)
 
-        Helper.save_record(path_myrecording, my_recording, fs)
 
-        features = pd.DataFrame(Model.extract_feature(Helper.load_audio(path_myrecording), MM))
-        normalized_features = pd.DataFrame(Helper.norm_input(path_myrecording, MM))
-    st.success("Done!")
 
-    # This is printing out the prediction
-    st.write(Model.make_prediction(path_myrecording))
 
-    # Showing the feature values extracted:
-    st.write(Helper.norm_input(path_myrecording, MM))
 
-    # plotting the wave file
-    fig = Helper.plot_wav_file(path_myrecording)
-    st.pyplot(fig = plt)
-    # This is creating the audio player
-    st.audio(Helper.read_audio(path_myrecording))
 
-    # This is showing the audio plot
-    fig = Helper.plot_features(path_myrecording)
-    st.pyplot(fig = plt)
+#
+# import noisereduce as nr
+#
+# if st.button("Record"):
+#     with st.spinner("Recording Your Audio..."):
+#
+#         duration = 4
+#
+#
+#         fs = 44000
+#         path_myrecording = f"./samples/{file_name}.wav"
+#         my_recording = Helper.record(duration, fs)
+#         # my_recording = Helper.record_JS(duration, fs)
+#
+#         Helper.save_record(path_myrecording, my_recording, fs)
+#
+#         features = pd.DataFrame(Model.extract_feature(Helper.load_audio(path_myrecording), MM))
+#         normalized_features = pd.DataFrame(Helper.norm_input(path_myrecording, MM))
+#     st.success("Done!")
+#
+#     # This is printing out the prediction
+#     st.write(Model.make_prediction(path_myrecording))
+#
+#     # Showing the feature values extracted:
+#     st.write(Helper.norm_input(path_myrecording, MM))
+#
+#     # plotting the wave file
+#     fig = Helper.plot_wav_file(path_myrecording)
+#     st.pyplot(fig = plt)
+#     # This is creating the audio player
+#     st.audio(Helper.read_audio(path_myrecording))
+#
+#     # This is showing the audio plot
+#     fig = Helper.plot_features(path_myrecording)
+#     st.pyplot(fig = plt)
+
+
+
+
+
+
+
+
 
 
 

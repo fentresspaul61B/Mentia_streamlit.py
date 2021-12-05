@@ -37,25 +37,25 @@ def record(duration=8, fs=sample_rate):
 
 
 # https://pretagteam.com/question/how-do-you-record-users-audio-in-streamlit-shearing
-from IPython.display import Audio
-from ipywebrtc import CameraStream, AudioRecorder
-import time
-
-
-def record_JS(duration=8, fs=sample_rate):
-    camera = CameraStream(constraints = {
-                  'audio': True,
-                  'video': False
-               },
-               mimeType = 'audio/wav')
-    recorder = AudioRecorder(stream = camera)
-    recorder.recording = True
-    print("recording")
-    time.sleep(duration)
-    print("done")
-    recorder.recording = False
-    audio = recorder.save('test.wav')
-    return audio
+# from IPython.display import Audio
+# from ipywebrtc import CameraStream, AudioRecorder
+# import time
+#
+#
+# def record_JS(duration=8, fs=sample_rate):
+#     camera = CameraStream(constraints = {
+#                   'audio': True,
+#                   'video': False
+#                },
+#                mimeType = 'audio/wav')
+#     recorder = AudioRecorder(stream = camera)
+#     recorder.recording = True
+#     print("recording")
+#     time.sleep(duration)
+#     print("done")
+#     recorder.recording = False
+#     audio = recorder.save('test.wav')
+#     return audio
 
 
 
