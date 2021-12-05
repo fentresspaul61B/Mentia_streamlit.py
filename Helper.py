@@ -186,13 +186,7 @@ def norm_input(file_path, min_max):
 
 
 # Helper Functions for normalzing data
-# This computs the min and max values by column in a data set.
-# I decided to do normalization manually because I was having issues
-# When trying to use new data, and it wasnt being normalized properly
-# using sci kit learn and in return predicting everything as negative. To fix this
-# I decided to pull up my bootstraps and just use functions that do it manually.
-# The input of this function is a dataset, the output is an list of lists.
-# Each item in the list is the column wise min and max's
+
 def dataset_minmax(dataset):
 	minmax = list()
 	for i in range(len(dataset.copy()[0])):

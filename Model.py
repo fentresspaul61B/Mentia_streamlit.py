@@ -152,6 +152,56 @@ print(confusion_matrix(KNN_Y_test, y_pred))
 
 
 
+
+"""
+Chi's Random Forrest Model:
+"""
+
+import numpy as np
+from sklearn.preprocessing import StandardScaler
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import recall_score
+
+ss = StandardScaler()
+X_train_scaled = ss.fit_transform(X_train)
+X_test_scaled = ss.transform(X_test)
+y_train = np.array(Y_train)
+
+pca_test = PCA(n_components=97)
+pca_test.fit(X_train_scaled)
+sns.set(style='whitegrid')
+plt.plot(np.cumsum(pca_test.explained_variance_ratio_))
+plt.xlabel('number of components')
+plt.ylabel('cumulative explained variance')
+plt.axvline(linewidth=4, color='r', linestyle = '--', x=10, ymin=0, ymax=1)
+plt.show()
+evr = pca_test.explained_variance_ratio_
+cvr = np.cumsum(pca_test.explained_variance_ratio_)
+pca_df = pd.DataFrame()
+pca_df['Cumulative Variance Ratio'] = cvr
+pca_df['Explained Variance Ratio'] = evr
+pca_df.head(90)
+
+
+# Extracting Principle Components
+pca = PCA(n_components=87)
+pca.fit(X_train_scaled)
+X_train_scaled_pca = pca.transform(X_train_scaled)
+X_test_scaled_pca = pca.transform(X_test_scaled)
+
+rfc = RandomForestClassifier()
+rfc.fit(X_train_scaled_pca, y_train)
+print(rfc.score(X_train_scaled_pca, y_train))
+
+
+y_pred_pca = rfc.predict(X_test_scaled_pca)
+
+Y_test2 = Y_test.astype('int')
+from sklearn.metrics import classification_report
+print(classification_report(Y_test2, y_pred_pca))
+
+
+
 """
 Below are helper functions that are connected to the record buton.
 
@@ -168,5 +218,5 @@ def make_prediction(file_path):
 
 
   # X = pd.DataFrame(extract_feature(Helper.load_audio(file_path, noise_reduce_on=True))).T
-  y_pred = model.predict(X.values)
+  y_pred = MLP_model.predict(X.values)
   return "This Audio is classified as speech with " + emotion_dict[y_pred[0]] + " emotion."
