@@ -19,7 +19,8 @@ from IPython.core.display import display as audio_display
 paths = ([
         "Audio_Features_updated_nov20.csv",
         "Labels_updated_nov20.csv",
-        "Mentia_Data_Updated_nov20.csv"
+        "Mentia_Data_Updated_nov20.csv",
+        "G_matrix.csv"
         ])
 
 # .drop("Unnamed:0", axis=1)
@@ -27,9 +28,25 @@ data = pd.read_csv(paths[2]).drop("Unnamed: 0", axis=1)
 matrix = pd.read_csv(paths[0]).drop("Unnamed: 0", axis=1)
 labels = pd.read_csv(paths[1])["Labels"]
 
+def cleaner(string):
+    if string == "Carol":
+        return "Anon_1"
+    elif string == "joyce":
+        return "Anon_2"
+    else:
+        return string
+
+
+data["Data_set"] = data["Data_set"].map(cleaner)
+
+g_matrix = pd.read_csv(paths[3]).drop("Unnamed: 0", axis=1).drop("Labels", axis=1)
+g_labels = pd.read_csv(paths[3])["Labels"]
+
 
 MM = Helper.dataset_minmax(matrix.values)
 
+labels = labels.append(g_labels)
+matrix = matrix.append(g_matrix)
 
 emotion_dict = {1: "Positive", 2: "Negative", 3: "Neutral"}
 
@@ -42,6 +59,12 @@ file_name = hash(time.time())
 
 
 st.set_page_config(page_title="SER Mentia", page_icon = '🎙️')
+
+
+st.write(matrix.shape)
+# st.write(g_matrix.shape)
+# st.write(matrix.append(g_matrix))
+# st.write(labels.apend(g_labels))
 
 st.write(
 """
@@ -140,6 +163,11 @@ c = (alt.Chart(df)
      color=alt.Color('Data_set', scale=alt.Scale(scheme=color_pallete)))
      )
 st.altair_chart(c, use_container_width=True)
+
+
+
+st.write(x)
+# string = ["A_97_year_old_video", "AlzheimerDisease_video", "Anon_1", "Ravdness", "Savee", "elderly_advice_video", "ep_18"]
 
 st.write(
 """
@@ -479,17 +507,17 @@ r"""
 source: [https://scikit-learn.org/stable/modules/neural_networks_supervised.html#neural-networks-supervised](https://scikit-learn.org/stable/modules/neural_networks_supervised.html#neural-networks-supervised)
 
 Consider the network in Figure 1. Its input layer consists of
-a set of input features $X = x_i | i belongs to N$.
+a set of input features $X = \left \{ x_i | i \in {\displaystyle \mathbb {N} } \right \}$.
 
 Each $x_i$ is a neuron. Each neuron in the network performs
 a weighted linear summation of its input,
 
-$$\sum_{i = 1}^{L} w_{i}x_{i} + \theta$$
+$$\sum_{i = 1}^{N} w_{i}x_{i} + \theta$$
 
  followed by a nonlinear activation function g (https://scikit-learn.org/stable/modules/neural_networks_supervised.html#neural-networks-supervised)
 
 
-$$g(.) = R \rightarrow R -$$
+$$g(.) = R \rightarrow R$$
 """
 
 )
