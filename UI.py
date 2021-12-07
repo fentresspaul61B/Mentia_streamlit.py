@@ -61,59 +61,164 @@ file_name = hash(time.time())
 st.set_page_config(page_title="SER Mentia", page_icon = '🎙️')
 
 
-st.write(matrix.shape)
-# st.write(g_matrix.shape)
-# st.write(matrix.append(g_matrix))
-# st.write(labels.apend(g_labels))
+# Setting font:
 
 st.write(
 """
 # Fall 2021 UC Berkeley Data Discovery Project: Building a Speech Emotion Recognition Algorithm For People With Memory Loss
-Authors: Paul Fentress, Chi Hoang
-## What is the question your project is attempting to answer?
-Can we accurately classify the user emotion for people with Memory Loss as positive negative or neutral, In order to see how engaged the user is while playing Devaworld.
 
-## Where does your project fit within the broader conversation/controversy surrounding your topic?
-Our project fits into the bigger picture of Memory Loss and assisted living,
-because one of the main goals of Devaworld, is to take some of the
-workloads off of the overworked and underpaid caregivers while
-providing a fun experience for the user, which is more a stimulating
-and positive experience than switching on the TV and zoning out.
+Authors: Paul Fentress, Chi Hoang"""
+)
 
-## What success would look like:
 
-** What are you trying to accomplish? **
-We are trying to build a SER prediction algorithm that can accuractely
-predict the emotions of people with Memory Loss, and later can be integrated
-into the Devaworld app.
+# t = st.radio("Toggle to see font change", [True, False])
+t = False
 
-** What is the outcome you hope to achieve? **
-Acheive 85% + accuracy for our SER model, while creating a useful for tool for Mentia.
+if t:
+    st.write(
+        """
+        <style>
+@font-face {
+  font-family: 'Times';
+  font-style: normal;
+  font-weight: 50;
+  src: url(https://fonts.gstatic.com/s/tangerine/v12/IurY6Y5j_oScZZow4VOxCZZM.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
 
-## The Data
-** Where does it come from? **
-We have multiple different data sources:
+    html, body, [class*="css"]  {
+    font-family: 'Tangerine';
+    font-size: 14px;
+    }
+    </style>
 
-- Interviews Chi and I conducted at assisted living home (281 Samples, Speakers: 2)
-- Various Youtube videos of people with memory loss / older people (178 Samples, Speakers: 5+)
-- Tess: SER data set from Kaggle (1527 Samples, Speakers: 2)
-- Ravdness: SER data set from Kaggle (763 Samples, Speakers: 24)
-- Savee: SER data set from Kaggle (286 Samples, Speakers: 4)
+    """,
+        unsafe_allow_html=True,
+    )
+
+
+
+
+
+
+
+
+
+
+
+
+
+# st.write(g_matrix.shape)
+# st.write(matrix.append(g_matrix))
+# st.write(labels.apend(g_labels))
+
+
+st.write("""
+# Introduction:
+
+Speech is a vital way to express one's emotions, needs and thoughts. The ability to speak coherently becomes increasingly challenging for people that are experiencing this heartbreaking cognitive impairment. As a result, memory loss can cause stress to not only the patient but also to their family and their caregivers.
+
+"Since 1900, the percentage of Americans age 65 and older nearly quadrupled (from 4.1% in 1900 to 16% in 2019), and the number increased more than 17 times (from 3.1 million to 54.1 million)." [https://acl.gov/aging-and-disability-in-america/data-and-research/projected-future-growth-older-population](https://acl.gov/aging-and-disability-in-america/data-and-research/projected-future-growth-older-population) Dementia appears commonly in between the ages of 65 and onward and is usually chronic, dysfunctional, and secondary to neurodegenerative processes for which there is currently no cure. ([https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6195406/](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6195406/)). Speech impairment is one of the most common struggles that patients with dementia, unfortunately, have to face. ([https://www.sciencedirect.com/science/article/abs/pii/S1214021X15300387](https://www.sciencedirect.com/science/article/abs/pii/S1214021X15300387)).
+
+In a world where those with cognitive impairments are often misunderstood or ignored, technology including Speech Emotion Recognition (S.E.R.) is a powerful tool for filling in this gap and elevating therapeutic digital experiences.
+
+## What is DevaWorld?
+
+Mentia's signature project DevaWorld is currently the leading technology of digital therapy for those with Dementia, Memory loss, or who are Cognitively Impaired.  DevaWorld is an interactive virtual world that is accessed through an app and played on an Ipad with the assistance of a caregiver. Inside DevaWorld, the user is guided through different options such as playing the piano, watering plants, or eating virtual chocolates with the avatar Julie.
 
 """
 )
-# dff = data.groupby("Data_set").count()
-# st.write(dff)
-# st.write(dff["name"] / sum(dff["name"]) )
+from PIL import Image
+julie = Image.open("Julie.png")
+st.image(julie,width=100, caption = "In Game Avatar Julie")
+
+
+st.write(
+"""
+One of the most frustrating parts of memory loss is losing one's sense of autonomy and accomplishment. DevaWorld is a source of therapeutic entertainment that restores these things.  Currently, DevaWorld is always played with a caregiver; however, by implementing AI into Julie, DevaWorld will be playable without the assistance of a caregiver so they can focus on more important tasks.
+
+"""
+
+)
+
+st.write(
+"""
+## Project Goal
+
+Currently, Julie prompts the user with questions such as "would you like to play the piano?" and other suggestions in a predictable manner which depend on where the user touches on the screen. Mentia's plan for DevaWorld 3.0 is to incorporate AI into Julie so the user's experience is more engaging while making DevaWorld playable without caregiver assistance.
+
+Speech to text, Computer Vision, and S.E.R. are the forms of intelligence Mentia plans to incorporate into Julie. Chi and I were tasked with creating the S.E.R. algorithm piece of Julies Intelligence. Specifically, we were tasked to build a model that accurately classifies the user's emotions as positive, negative, or neutral.
+
+Our success metric was model accuracy, which we wanted to achieve 85% model accuracy.
+
+The diagram below shows a high-level overview of how our S.E.R. will be used, and which specific part of the project Chi and I worked on which is inside the teal highlighted box.
+"""
+
+)
+
+st.write(
+"""
+**Step 1: Input Signal**
+
+First, a user speaks out loud while playing DevaWorld:
+"""
+)
+
+diagram_1 = Image.open("Diagram_1.png")
+st.image(diagram_1)
+
+st.write(
+"""
+**Step 2: Audio Data Collection (Microphone)**
+
+Second, the microphone on the IPad will pick up the Audio Data while the User is playing DevaWorld.
+"""
+)
+
+diagram_2 = Image.open("Diagram_2.png")
+st.image(diagram_2)
+
+st.write(
+"""
+**Step 3: Predictive Model (Our Project)**
+
+Process the audio data. Make a classification of Positive, Negative, or Neutral.
+"""
+)
+
+diagram_3 = Image.open("Diagram_3.png")
+st.image(diagram_3)
+
+st.write(
+"""
+**Step 4: Julies Action**
+
+Julie will make a more intelligent prompt or no prompt in the game based on the prediction from our S.E.R. model.
+"""
+)
+
+diagram_4 = Image.open("Diagram_4.png")
+st.image(diagram_4)
+
+st.write(
+"""
+# About the Data
+
+Collected data came from multiple sources:
+- 281 Samples of 2 speakers came from an interview that was conducted at Elder Ashram
+- 18 samples of a speaker came from an interview that was conducted by Mentia experts
+- 178 samples of more than speakers: 5+)
+- Tess: SER data set from Kaggle (1527 Samples, Speakers: 2)
+- Ravdness: SER data set from Kaggle (763 Samples, Speakers: 24)
+- Savee: SER data set from Kaggle (286 Samples, Speakers: 4)
+- There are 37 total speakers in the training data set and only 13 different speakers for people elderly people or people with Memory Loss
+- 50% of the Training data comes from the Tess dataset (1527 samples)
+- Only one language included: English
+
+"""
+)
 
 fetures_with_lables = pd.read_csv(paths[0]).drop("Unnamed: 0", axis=1).join(labels).join(data)
-
-# hist = plt.hist(fetures_with_lables["0"], bins=50)
-# st.pyplot(fig = plt)
-
-st.write(data)
-
-# st.write(fetures_with_lables.groupby(["Data_set", "Labels"], as_index=False).mean()[["Data_set","Labels", "0"]])
 
 
 
@@ -164,51 +269,56 @@ c = (alt.Chart(df)
      )
 st.altair_chart(c, use_container_width=True)
 
-
-
-st.write(x)
-# string = ["A_97_year_old_video", "AlzheimerDisease_video", "Anon_1", "Ravdness", "Savee", "elderly_advice_video", "ep_18"]
-
 st.write(
 """
-** What bias might be present in the data? **
+## Data Labeling
 
-- There are 37 total speakers in the training data set, and only 13 different speakers for people eldlerly people or people with Memory Loss.
-In order order to improve the model more representative samples should be added to the data set in order to
-balance the data.
-- 50% of the data comes from the Tess dataset (1527 samples). Therefore there is not a wide range different voices, and there could be
-possible overfitting towards the Tess dataset.
-- Only one language included: English
+We labeled the data positive, negative or neutral by listening to audio clips and using our judgment. In order to verify what the team agreed on for labeling, we sent out a survey of audio examples to the Mentia team to classify as positive, negative, or neutral. After the team took the survey, we had a better understanding of how to label the data. Each sample is numbered based on a labeling system: 1 is for a positive response, 2 is for a negative response and 3 is for a neutral response.
 
-** What were some of the other issues with the dataset (missing values, limitations, etc.)? How did you deal with those issues? **
+With that being said, this labeling process is inherently a very subjective task. Moreover, the context of the video could introduce bias, so we tried to focus on listening to the audio clip as an individual clip out of context while labeling the data.
 
-One of the issues we had was collecting a sufficient amount of data to train on. Although we were given many (quanitfy) videos to use,
-the process of converting the video to audio, splitting the audio into samples, then labeling the samples was cumbersome.
-In order to overcome this, we sought out other data sets that were pre-labeled. A limitation of doing this
-is that we were including audio samples of people without memory loss, and therefore our dataset, was not perfectly tailored for
-this problem. With more time and cold emailing, we could create a more representative data set with more elderly people, and
-people with memory loss. Furthermore, a wide range of different people, at different stages of memory loss, with multiple languages would
-create the ideal data set.We have a lot of noise in the Devaworld samples, for example, there are often multiple voices in the samples,
-or music playing from the Devaworld app. Additionally Julie, the avatar in Devaworld, is speaking at the same time as the people playing Devaworld.
-The video quality of the Mentia Videos is relatively low compared to the other samples, therefore there is a lot of white noise in the samples from Mentia.
-In order to deal with the white noise, we used a denoiser python package; however, we have not yet dealt with isolating a single voice from a group,
- which means the model could be confused when trying to classify a sample where two people are talking over each other.
+## Issues With The data and Our Solutions
 
-## Solution/Model
+One of the issues we had was collecting a sufficient amount of representative data to train on. We were given 172 videos to use, which were recordings of People with Memory Loss playing DevaWorld, and them speaking their opinion on changes that were going to be added to the game. Mentia's lead scientist was conducting the interview, and guiding the people with Memory Loss through the DevaWorld. Due to the videos being two or more people, isolate the samples where the person with Memory loss was speaking, not the scientist performing the interview. The process of converting the video to audio, splitting the audio into samples to isolate the correct speaker, then labeling the samples was cumbersome.
+
+In order to overcome this, we sought out other data sets that were pre-labeled. A limitation of doing this is that we were including audio samples of people without memory loss, and therefore our dataset, was not the ideal representation for this problem. With more time cold emailing other researchers, we could create a more representative data set with more elderly people, and people with memory loss to create the ideal training data set. Furthermore, adding a wide range of different people, at different stages of memory loss, with multiple languages would
+create a more representative data set.
+
+We have a lot of noise in the Devaworld samples, for example, there are often multiple voices in the samples, or music playing from the Devaworld app. Additionally, Julie, the avatar in Devaworld, is speaking at the same time as the people playing Devaworld. The video quality of the Mentia Videos is relatively low compared to the other samples, therefore there is a lot of white noise in the samples from Mentia. In order to deal with the white noise, we used a noise reduction python package; however, we have not yet dealt with isolating a single voice from a group, which means the model could give poor results when trying to classify a sample where two people are talking over each other.
+
+In version 3.0 of Devaworld, the goal is to have the user play DevaWorld without caregiver assistance, and therefore the problem of overlapping voices will not be an issue in this scenario.
+"""
+)
+
+
+# string = ["A_97_year_old_video", "AlzheimerDisease_video", "Anon_1", "Ravdness", "Savee", "elderly_advice_video", "ep_18"]
+
+
+st.write(
+
+"""
+# Methods
+
+We used Machine Learning to address this question. We collected audio data, extracted signals from the audio, and built a predictive model.
+
+## Feature Selection
+
+In order to extract audio features, we used the Librosa Python Package. Librosa has many useful tools for processing, listening, and visualizing audio in Python. For our model, we extracted three features from our audio data which were: Chroma, MFS, and MFCC. [https://librosa.org/doc/](https://librosa.org/doc/)
 
 """)
 
 st.write(
 
-"""** What statistical model did you use? How does it work? **
+"""
+## Chroma
 
-## Step #1: Feature Selection
+"In Western music, the term chroma feature or Chromagram closely relates to the twelve different pitch classes. Chroma-based features, which are also referred to as "pitch class profiles", are a powerful tool for analyzing music whose pitches can be meaningfully categorized (often into twelve categories) and whose tuning approximates to the equal-tempered scale. One main property of chroma features is that they capture harmonic and melodic characteristics of music, while being robust to changes in timbre and instrumentation." [https://en.wikipedia.org/wiki/Chroma_feature](https://en.wikipedia.org/wiki/Chroma_feature)
 
-** Which features did we choose to use, and why? **
-For our model we extracted three features from our audio data which were:
-MFS, MFCC, and Chroma. Below we will explain what each feature means, and
-why we chose to use them.
-""")
+Chroma is a mathematical way of sorting audio frequency signals into bins that correspond to the Western musical scale: {C, C♯, D, D♯, E , F, F♯, G, G♯, A, A♯, B}. There are 12 musical notes in the western musical scale and the Librosa chroma method detects the presence of these 12 notes from an audio sample and returns a matrix with 12 columns. We flatten this matrix by taking the mean value of the 12 columns corresponding to each note, which returns a (12,1) flattened array of numerical values.
+
+"""
+
+)
 
 with st.echo():
     example_path = "samples/11520134717607883.wav"
@@ -217,23 +327,28 @@ with st.echo():
     # This is creating the audio player
     st.audio(Helper.read_audio(example_path))
 
+    fig = Helper.plot_features(example_path, n_mfcc=7, mel=False, chroma=True )
+    st.pyplot(fig = plt)
+
 
 st.write(
 """
 
-### Mel Frequency Spectogram:
+## Mel Frequency Spectrogram:
 
-How to interpret Mel Frequency Spectogram: Each point that represented on
-the plot above is a moment and the y axis represents how repsent a certain
-frequency is, which is measured by decibles on the show on the side bar.
-The inputs into the feature is an audio path, and the output is a (128, range in frequency).
-128 represents the number of slices we take, and the second number represents
-how detailed each one of those slices are. This creates a matrix, and the reason we are
-taking the mean, is so that we can find the average most prominent
-frequency for a given slice, which would take the shape of each sample from (128, 256) or
-(128, 512) to both be (128,1), (128,1) which is essntially flattening the audio
-and returning an array of the most prominent frequency for each of the slices for a given
-sample.
+[https://medium.com/analytics-vidhya/understanding-the-mel-spectrogram-fca2afa2ce53](https://medium.com/analytics-vidhya/understanding-the-mel-spectrogram-fca2afa2ce53)
+
+[https://www.kaggle.com/shivamburnwal/speech-emotion-recognition](https://www.kaggle.com/shivamburnwal/speech-emotion-recognition)
+
+The Mel Scale is a logarithmic transformation of audio in order to fit the human hearing range. Audio signals can be quantified into frequencies, and the human hearing range is from 20 - 20,000 hertz. The sound of low sub-bass that you hear at a concert, or the rumble of seismic plates being shifted is around the 0 - 30 hertz range, while white noise and hissing sounds are around the 20,000-hertz range. The interesting thing about human hearing is that our perception of audio is not linear. For example, a human can easily tell the difference between 100 and 200 hertz (kick drum vs a snare), while the difference between 7000 and 7100 hertz is barely audible.  If we kept our data on a linear scale, our analysis and models would consider a 5000 and 5200 frequency as equally different than a 200 and 400-hertz noise, which as stated above is not the case for our own experience, which is why we squish our audio into the Mel Scale so the difference between 200 and 400 is substantial while the difference between 5000 and 5200 is less substantial, therefore creating a better representation of human perception.
+
+Now that we understand the Mel Scale, what is a Spectrogram? "A spectrogram is a detailed view of audio, able to represent time, frequency, and amplitude all on one graph. A spectrogram can visually reveal broadband, electrical, or intermittent noise in the audio, and can allow you to easily isolate those audio problems by sight." [https://www.izotope.com/en/learn/understanding-spectrograms.html](https://www.izotope.com/en/learn/understanding-spectrograms.html)
+
+(Octave is twice the frequency on the musical scale, 3 times the frequency is the dominant note)
+
+In our case we are not so much interested in the visualization of the spectrogram, rather we are interested in the numerical values of it of the most prominent frequencies for a given time slice. A spectrogram is created by taking the Fast Fourier Transform (FFT) of multiple time slices of an audio sample. The Mel Frequency spectrogram is a logarithmically scaled numerical description of audio frequencies over time. [https://www.youtube.com/watch?v=spUNpyF58BY](https://www.youtube.com/watch?v=spUNpyF58BY)
+
+For our feature extraction function, our audio is sliced into 128 beats per minute, which in turn is a matrix with 128 columns. The number of rows ranges from 0 to the highest present frequency. We then take the mean of all 128-time slices which gives us an array of 128 values each representing the average frequency at that point in time for the given sample.
 
 """
 )
@@ -244,20 +359,11 @@ with st.echo():
 
 st.write(
 """
-### MFCC: Mel-Frequency Cepstral Coefficients
-MFCC's represent distinct units of sounds which are the individual
-parts which compose the Mel-frequency cepstrum. The mel frequency
-ceptrum is a way to model the human vocal tract. "Any sound generated
-by humans is determined by the shape of their vocal tract (including tongue, teeth, etc).
-If this shape can be determined correctly, any sound produced can be
-accurately represented." These coefficients are used to extract isolate
-the most relevant audio signals to human hearing, which is a relatively
-small range of frequencies compared to the total range of sound frequencies.
- The first 12-13 coefficients are the most relevant to human hearing,
- while any after that are less important. The reason why 40 n_mfcc are
- chosen is because we take the first 13 first derivative ,
- then take the second derivative and we end up with 13 + 13 + 13 coefficients
- per time frame, and then 1 more coeficent added to make a nice even number.
+## MFCC: Mel-Frequency Cepstral Coefficients
+
+MFCC's represent distinct units of sounds which are the individual parts that compose the Mel-frequency cepstrum. The Mel-Frequency Cepstrum is a way to model the human vocal tract. "Any sound generated by humans is determined by the shape of their vocal tract (including tongue, teeth, etc). If this shape can be determined correctly, any sound produced can be accurately represented." [https://towardsdatascience.com/how-i-understood-what-features-to-consider-while-training-audio-files-eedfb6e9002b](https://towardsdatascience.com/how-i-understood-what-features-to-consider-while-training-audio-files-eedfb6e9002b)
+
+These coefficients are used to isolate the most relevant audio signals to human hearing, which is a relatively small range of frequencies compared to the total range of sound frequencies. The first 12-13 coefficients are the most relevant to human hearing, while any after that are less important. The reason why we have 40 MFCC features is that Librosa takes the first and second derivative of the 13 coefficients which ends up being 13 + 13 + 13, and then one extra coefficient is taken to make an even number of 40.
 """
 )
 
@@ -268,50 +374,21 @@ with st.echo():
 
 st.write(
 """
-### Chromagram
-According to wikipedia:
-"In Western music, the term chroma feature or chromagram closely
-relates to the twelve different pitch classes. Chroma-based
-features, which are also referred to as "pitch class profiles",
-are a powerful tool for analyzing music whose pitches can be meaningfully
-categorized (often into twelve categories) and whose tuning approximates
-to the equal-tempered scale. One main property of chroma features is that
-they capture harmonic and melodic characteristics of music, while
-being robust to changes in timbre and instrumentation."
+## Features Summary
 
-Chroma is or mathematical way of putting audio of certain frequency into bins which
-correspond to the musical scale: {C, C♯, D, D♯, E , F, F♯, G, G♯, A, A♯, B}
-"""
-)
+- 12 from CHROMA. These are the 12 musical notes on a western musical scale and their corresponding frequency bins.
+- 128 from the Mel Frequency Spectrogram, where are the means of the MFS for 128-time slices. This feature shows how prominent different frequencies are in a given time slice, measured by volume.
+- 40 from MFCC: Mel-Frequency Cepstral Coefficients, where each value is the mean of the MFCC for to top 40 most relevant coefficients to model the human vocal tract.
 
-with st.echo():
-    fig = Helper.plot_features(example_path, n_mfcc=7, mel=False, chroma=True )
-    st.pyplot(fig = plt)
-
-st.write(
-"""
-### The reason why there is 180 features:
-
-* 128 from the Mel Frequency Spectogram, where are the means of the MFS for 128 time slices. This feature shows how prominent different frequeinces are in a given time slice, measured by volume.
-
-* 40 from MFCC: Mel-Frequency Cepstral Coefficients, where each value is the means of the MFCC for to top 40 most relevant coefficients for human hearing.
-* 12 from CHROMA. These are the 12 musical notes on a western musical scale, and their corresponding frequency bins.
-
-### A hstack: "Stacks arrays in sequence horizontally (column wise)."
-
-Using the hstack data structure, we append these feature arrays together all together side by side as so:
-
-128 + 40 + 12 = 180
+128(MFS) + 40(MFCC) + 12(Chroma) = 180 total features
 """
 )
 
 st.write(
 """
-### Loading Data in Batches Using Pytorch DataLoader
-Now that we understand the features lets extract them
-from our audio files, and add them to a table.
-After attempting to load all the data at once, we ran into dead
-kernels and extended run times, so we switched to using a DataLoader.
+## Loading Data in Batches Using Pytorch DataLoader
+
+Now that we understood the features and extracted them from our audio samples, we added them to a table. After attempting to load all the data at once, we ran into dead kernels and extended run times, so we switched to using a Pytorch DataLoader. In order to extract the features from the data, we Librosa's audio loading method.
 
 """
 )
@@ -358,10 +435,8 @@ with st.echo():
 
 st.write(
 """
-### Feature Extraction
-Using Librosa, and our DataLoader, we have each of our audio samples in numerical form.
-Now that the Audio is in numerical form, we can extract our three features from each
-Audio sample using the feature extraction function below, which we adopted from:
+## Feature Extraction
+We adopted our feature extraction function from the project linked here:
 https://www.kaggle.com/shivamburnwal/speech-emotion-recognition
 """
 )
@@ -390,9 +465,7 @@ with st.echo():
 
 st.write(
 """
-## Features Table:
-After extracting our features by using our DataLoader and extract_feature
-function, we now have our features matrix to make predictions:
+## Features Table
 """
 )
 
@@ -401,31 +474,20 @@ st.write(matrix)
 
 st.write(
 """
-## Step #2: Data Pre-processing
+## **Data Pre-processing**
 
-** How did you Pre-process the Data? **
+**How did you Pre-process the Data?**
+
 - We used Normalization for our MLP Neural Network Model
 - We used PCA for our KNN and Random Forrest Models
 
+**What is the purpose of Pre-processing for SER?**
 
-** What is the purpose of Pre-processing for SER? **
+The reason we chose to use normalization is because our audio data does not follow a normal distribution and because we used a gradient-based prediction algorithm: MLP Neural Network. In order to verify that our data was indeed not normally distributed we used a QQ (Quantile Quantile) plot to verify how our data was distributed. A QQ plot is a way of visually checking the distribution of data.
 
-The reason we chose to use normalization on our audio data is because we used audio data does
-not follow a normal distrubtion, and because we used a gradient based prediction algorithm: MLP Neural Network.
-In order to verify that our data was indeed not normally distrubuted we used a QQ (Quantile Quantile)
-plot to verify how our data was distributed. A QQ plot is a way of visually checking the
-distrubtion of data.
+A QQ plot that has the points scatter straight along the line means that the sample data does follow the distribution you have specified (In our case we wanted to see if our data follows a normal distribution.). If your data diverges from the straight line that means your data does not follow the distribution you have specified. A QQ plot compares the quantiles of a distribution to our sample data and sees how correlated they are for all data points. If our sample data is highly correlated with the target distribution, the data will fit the target distribution line, otherwise, our sample data will diverge from the target line.
 
-A QQ plot that has the points scatter straight along the line means that
-the sample data does follow the distrubtion you have specified (In our case we wanted to see if our data follows a normal distrubtion.).
-If your data diverges from the straight line that means your data does not follow the distribtion you have specified.
-A QQ plot compares the quantiles of a distrubtion to
-our sample data, and sees how correlated they are for all data points. If our sample data
-is highly correlated with the target distrubtion, the data will fit the target distrubtion line,
-otherwise our sample data will diverge from the target line.
 """
-
-
 )
 
 # Resseting the figure
@@ -441,11 +503,9 @@ with st.echo():
 
 
 st.write("""
-We found that our extracted feature data diverged from
-the target distubtion around the tails, which meant that our features do not follow a normal distrubtion.
+We found that our extracted feature data diverged from the target distubtion around the tails, which meant that our features do not follow a normal distrubtion.
 
-After using a helper function to normalize our features, our data
-is ready for predictions:
+After using a helper function to normalize our features, our data is ready for predictions:
 
 ### Features Table (After Normalization)
 """)
@@ -462,15 +522,145 @@ with st.echo():
 # df = pd. DataFrame(data_list) create DataFrame from `data_list`
 # print(df)
 
-st.write("""
-## Modeling:
-We iterated through 3 different models which are ideal for data which do
-not follow a normal distrubtion and obtained the following accuracy for
-each model:
+
+
+st.write(
 """
+# Model Selection
+We iterated through 3 different models which are ideal for data which do not follow a normal distribution and obtained the following accuracy for each model:
+- KNN
+- PCA + Random Forest
+- MLP Neural Network
+
+Using PCA, we can reduce the dimension of the dataset while minimizing information loss.  First, we instantiated a PCA function with a baseline of 97 components.
+"""
+
+)
+plt.figure()
+# num_vars = 180
+# features_mean = np.mean(matrix, axis=0)
+# features_std = np.std(matrix, axis=0)
+# features_centered = (matrix - features_mean) / features_std
+#
+# u, s, vt = np.linalg.svd(features_centered, full_matrices=False)
+#
+# eigvals = s**2 / sum(s**2)  # NOTE (@amoeba): These are not PCA eigenvalues.
+#                                # This question is about SVD.
+#
+# sing_vals = np.arange(num_vars) + 1
+# plt.title('Scree Plot')
+# plt.xlabel('Principal Component')
+# plt.ylabel('Eigenvalue')
+# plt.xticks(np.arange(0,26, 2))
+# scree = plt.plot(np.arange(25), eigvals[:25]);
+
+from sklearn.decomposition import PCA
+
+from sklearn.preprocessing import StandardScaler
+
+
+from sklearn.model_selection import train_test_split
+from sklearn.decomposition import PCA
+from sklearn.neighbors import KNeighborsClassifier as knn
+
+# Normalzing the data:
+MM = (Helper.dataset_minmax(matrix.values))
+X = Helper.normalize_dataset(matrix.values, MM)
+seed = 9
+Y = labels
+
+X_train, X_test, Y_train, Y_test = train_test_split(X,Y, test_size = .1, random_state = seed)
+
+ss = StandardScaler()
+X_train_scaled = ss.fit_transform(X_train)
+X_test_scaled = ss.transform(X_test)
+y_train = np.array(Y_train)
+
+
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import recall_score
+
+#instantiate random forest model and fit the scaled data to the model
+rf = RandomForestClassifier()
+rf.fit(X_train_scaled, y_train)
+
+
+pca_test = PCA(n_components=97)
+pca_test.fit(X_train_scaled)
+sns.set(style='whitegrid')
+plt.plot(np.cumsum(pca_test.explained_variance_ratio_))
+plt.xlabel('number of components')
+plt.ylabel('cumulative explained variance')
+plt.axvline(linewidth=4, color='r', linestyle = '--', x=10, ymin=0, ymax=1)
+
+
+st.pyplot(fig = plt)
+
+
+evr = pca_test.explained_variance_ratio_
+cvr = np.cumsum(pca_test.explained_variance_ratio_)
+pca_df = pd.DataFrame()
+pca_df['Cumulative Variance Ratio'] = cvr
+pca_df['Explained Variance Ratio'] = evr
+st.write(pca_df.head(90))
+
+
+st.write(
+"""
+The above graph shows that even when PCA reduces our predicting variables to 87 components, our dataset still covers more than 95% of the variance. Therefore, there is no need to keep all 180 features. We then fit our training test set and testing test set into this PCA model.
+	To check if there’s any improvement we can get, we now fit our training data and testing data into a Random Forest model. We first tried to see which parameters are best fit for our model by using Randomized Search CV. This gave us the following results:
+
+"""
+
+
+
 )
 
-dct = ({"MLP Neural Network": .875,
+
+# st.cache
+from sklearn.model_selection import train_test_split
+from sklearn.decomposition import PCA
+from sklearn.neighbors import KNeighborsClassifier as knn
+
+# Normalzing the data:
+MM = (Helper.dataset_minmax(matrix.values))
+X = Helper.normalize_dataset(matrix.values, MM)
+seed = 9
+Y = labels
+
+X_train, X_test, Y_train, Y_test = train_test_split(X,Y, test_size = .1, random_state = seed)
+
+from sklearn.decomposition import PCA
+
+# Using scree plot analysis we found 87 principle components do
+# retain 99% of variance.
+pca = PCA(n_components=87)
+
+# Fitting the PCA model to the training data
+X_train = pca.fit_transform(X_train)
+
+# transofmring the test data
+X_test = pca.transform(X_test)
+
+# Choosing number of neighbors after iterating through
+# different values for k, 31 gave the best results.
+k = 51
+
+# Fitting the model:
+clf = knn(n_neighbors=k)
+KNeighborsClassifier = clf.fit(X_train, Y_train)
+
+# Making Predictions:
+y_pred = KNeighborsClassifier.predict(X_test)
+
+
+st.write(
+
+"""
+## Initial Model Accuracy
+""")
+
+dct = ({
         "KNN": 0.8355263157894737,
         "Random Forrest": .81
 })
@@ -480,26 +670,75 @@ accuracy_table = accuracy_table.rename(columns={0: "Model", 1: "Accuracy"})
 
 st.write(accuracy_table)
 
+# Accuracy:
+# st.write(sum(Y_test ==  y_pred) / len(y_pred))
+
+# st.write("KNN Model Accuracy: 0.8585526315789473")
+
+
+#@title
+# import plotly.figure_factory as ff
+# # st.cache
+# z = confusion_matrix(Y_test, y_pred)[::-1]
+# # z = confusion_matrix( y_pred, KNN_Y_test)
+#
+# x = ['Positive', 'Negative', 'Neutral']
+# y = x[::-1].copy()
+#
+# # change each element of z to type string for annotations
+# z_text = [[str(y) for y in x] for x in z]
+#
+# # set up figure
+# fig = ff.create_annotated_heatmap(z, x=x, y=y, annotation_text=z_text, colorscale=color_pallete)
+#
+# # add title
+# fig.update_layout(title_text='<b>Confusion matrix</b>',
+#                   #xaxis = dict(title='x'),
+#                   #yaxis = dict(title='x')
+#                  )
+#
+# # add custom xaxis title
+# fig.add_annotation(dict(font=dict(color="black",size=14),
+#                         x=0.5,
+#                         y=-0.15,
+#                         showarrow=False,
+#                         text="Predicted value",
+#                         xref="paper",
+#                         yref="paper"))
+#
+# # add custom yaxis title
+# fig.add_annotation(dict(font=dict(color="black",size=14),
+#                         x=-0.35,
+#                         y=0.5,
+#                         showarrow=False,
+#                         text="Real value",
+#                         textangle=-90,
+#                         xref="paper",
+#                         yref="paper"))
+#
+# # adjust margins to make room for yaxis title
+# fig.update_layout(margin=dict(t=50, l=200))
+#
+# # add colorbar
+#
+#
+# # fig.update_layout(height=500, width=700)
+# fig['data'][0]['showscale'] = True
+# st.plotly_chart(fig)
+
+
+
 
 st.write("""
 
-### MLP Neural Network
+## Final Model: MLP Neural Network
 
-A multi-layer perceptron is a classification algorithm that
-consists of multiple layers of perceptrons. In addition of an
-input layer, an output layer, MLP can have more than one hidden
-layers. Each hidden layer consists of neurons that use non-linear
-activation functions. These are known as nodes. Each node in one
-layer connects with a certain weight to every node in the following
-layer (https://en.wikipedia.org/wiki/Multilayer_perceptron). The
-output layer acts as a logical net that chooses an index to send
-to the output on the basis of inputs it receives from the hidden l
-ayer, so that the classification error is minimized
-(https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.329.3346&rep=rep1&type=pdf).
+A multi-layer perceptron is a classification algorithm that consists of multiple layers of perceptrons. In addition to an input layer, an output layer, MLP can have more than one hidden layer. Each hidden layer consists of neurons that use non-linear activation functions. These are known as nodes. Each node in one layer connects with a certain weight to every node in the following layer (https://en.wikipedia.org/wiki/Multilayer_perceptron). The output layer acts as a logical net that chooses an index to send to the output on the basis of inputs it receives from the hidden layer so that the classification error is minimized. (https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.329.3346&rep=rep1&type=pdf).
 
 """)
 
-st.image("https://s3.us-west-2.amazonaws.com/secure.notion-static.com/b5119d04-b250-4550-8581-1f7838ccf594/Screen_Shot_2021-12-04_at_12.19.21_PM.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20211204%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20211204T231204Z&X-Amz-Expires=86400&X-Amz-Signature=893f4533c9da9c402ee552a7af59aee2ccf8a6d0408c5a3b73e5fb7c3c8bd356&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Screen%2520Shot%25202021-12-04%2520at%252012.19.21%2520PM.png%22&x-id=GetObject")
+MLP_image = Image.open("MLP.png")
+st.image(MLP_image)
 
 st.write(
 
@@ -526,18 +765,20 @@ $$g(.) = R \rightarrow R$$
 
 
 st.write("""
-MLP is able to learn on non linear model
 ([https://scikit-learn.org/stable/modules/neural_networks_supervised.html#neural-networks-supervised](https://scikit-learn.org/stable/modules/neural_networks_supervised.html#neural-networks-supervised)).
 
-This gives us an ability to separate our data which
-is non-linearly separable. (this is why we choose MLP model).
-However, one of the disadvanatge of MLP is that it starts
-with a different set of random weights. This can result
-in different validation accuracy
-([https://scikit-learn.org/stable/modules/neural_networks_supervised.html#neural-networks-supervised](https://scikit-learn.org/stable/modules/neural_networks_supervised.html#neural-networks-supervised)). MLP also requires user to tune some hyperparameters such as the number of hidden neurons, layers, and iterations. Too many hidden neurons can cause overfitting, but too little hidden neurons can result in underfitting the data.
+This gives us an ability to separate our data which is non-linearly separable. (this is why we choose the MLP model). However, one of the disadvantages of MLP is that it starts with a different set of random weights. This can result in different validation accuracy ([https://scikit-learn.org/stable/modules/neural_networks_supervised.html#neural-networks-supervised](https://scikit-learn.org/stable/modules/neural_networks_supervised.html#neural-networks-supervised)). MLP also requires users to tune some hyperparameters such as the number of hidden neurons, layers, and iterations. Too many hidden neurons can cause overfitting, but too little hidden neurons can result in under-fitting the data ([https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.329.3346&rep=rep1&type=pdf](https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.329.3346&rep=rep1&type=pdf)).
+
+
+## Our MLP Model Using Scikit Learn:
 
 """
 )
+
+data = pd.read_csv("Mentia_Data_Updated_nov20.csv").drop("Unnamed: 0", axis=1)
+matrix = pd.read_csv("Audio_Features_updated_nov20.csv").drop("Unnamed: 0", axis=1)
+labels = pd.read_csv("Labels_updated_nov20.csv")["Labels"]
+
 
 
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
@@ -572,6 +813,8 @@ with st.echo():
     y_pred = MLP_model.predict(X_test)
 
     # Get the classification accuracy on the test set
+
+    st.write(""" ## Model Results: """)
     st.write(sum(Y_test ==  y_pred) / len(y_pred))
 
 # Creating a confusion matrix for MLP Classifier
@@ -626,119 +869,6 @@ fig['data'][0]['showscale'] = True
 st.plotly_chart(fig)
 
 
-st.write(
-
-"""
-** Did you try any other models before settling on your final one? **
-
-We Tried 2 other models Including:
-- K - Nearest Neighbors
-- Random Forrest
-""")
-
-st.write("Initial Model: K-Nearest Neighbors")
-
-with st.echo():
-    # st.cache
-    from sklearn.model_selection import train_test_split
-    from sklearn.decomposition import PCA
-    from sklearn.neighbors import KNeighborsClassifier as knn
-
-    # Normalzing the data:
-    MM = (Helper.dataset_minmax(matrix.values))
-    X = Helper.normalize_dataset(matrix.values, MM)
-    seed = 9
-    Y = labels
-
-    X_train, X_test, Y_train, Y_test = train_test_split(X,Y, test_size = .1, random_state = seed)
-
-    from sklearn.decomposition import PCA
-
-    # Using scree plot analysis we found 87 principle components do
-    # retain 99% of variance.
-    pca = PCA(n_components=87)
-
-    # Fitting the PCA model to the training data
-    X_train = pca.fit_transform(X_train)
-
-    # transofmring the test data
-    X_test = pca.transform(X_test)
-
-    # Choosing number of neighbors after iterating through
-    # different values for k, 31 gave the best results.
-    k = 51
-
-    # Fitting the model:
-    clf = knn(n_neighbors=k)
-    KNeighborsClassifier = clf.fit(X_train, Y_train)
-
-    # Making Predictions:
-    y_pred = KNeighborsClassifier.predict(X_test)
-
-    # Accuracy:
-    st.write(sum(Y_test ==  y_pred) / len(y_pred))
-
-# st.write("KNN Model Accuracy: 0.8585526315789473")
-
-
-#@title
-import plotly.figure_factory as ff
-# st.cache
-z = confusion_matrix(Y_test, y_pred)[::-1]
-# z = confusion_matrix( y_pred, KNN_Y_test)
-
-x = ['Positive', 'Negative', 'Neutral']
-y = x[::-1].copy()
-
-# change each element of z to type string for annotations
-z_text = [[str(y) for y in x] for x in z]
-
-# set up figure
-fig = ff.create_annotated_heatmap(z, x=x, y=y, annotation_text=z_text, colorscale=color_pallete)
-
-# add title
-fig.update_layout(title_text='<b>Confusion matrix</b>',
-                  #xaxis = dict(title='x'),
-                  #yaxis = dict(title='x')
-                 )
-
-# add custom xaxis title
-fig.add_annotation(dict(font=dict(color="black",size=14),
-                        x=0.5,
-                        y=-0.15,
-                        showarrow=False,
-                        text="Predicted value",
-                        xref="paper",
-                        yref="paper"))
-
-# add custom yaxis title
-fig.add_annotation(dict(font=dict(color="black",size=14),
-                        x=-0.35,
-                        y=0.5,
-                        showarrow=False,
-                        text="Real value",
-                        textangle=-90,
-                        xref="paper",
-                        yref="paper"))
-
-# adjust margins to make room for yaxis title
-fig.update_layout(margin=dict(t=50, l=200))
-
-# add colorbar
-
-
-# fig.update_layout(height=500, width=700)
-fig['data'][0]['showscale'] = True
-st.plotly_chart(fig)
-
-st.write(
-
-"""
-## How does K-Nearest Neighbors Work?
-
-"""
-
-)
 
 
 
@@ -746,56 +876,51 @@ st.write(
 # Create scree plot:
 # https://www.datasklr.com/principal-component-analysis-and-factor-analysis/principal-component-analysis
 
-num_vars = 180
-features_mean = np.mean(matrix, axis=0)
-features_std = np.std(matrix, axis=0)
-features_centered = (matrix - features_mean) / features_std
-
-u, s, vt = np.linalg.svd(features_centered, full_matrices=False)
-
-eigvals = s**2 / sum(s**2)  # NOTE (@amoeba): These are not PCA eigenvalues.
-                               # This question is about SVD.
-
-sing_vals = np.arange(num_vars) + 1
-plt.title('Scree Plot')
-plt.xlabel('Principal Component')
-plt.ylabel('Eigenvalue')
-plt.xticks(np.arange(0,26, 2))
-scree = plt.plot(np.arange(25), eigvals[:25]);
-# st.pyplot(fig = plt)
 
 
 st.write("""
-## Impact/Next Steps
-** What were your results / what results do you expect? **
+## Next Steps
 
-Our KNN and MLP models predict the data in the test set with 87% accuracy.
+We have a model that performs relatively well on the test set; however, there is more to improve the model. Some of the ways the model could be improved are:
 
-** What decisions will be made as a result of your work? **
+- Add more representative samples of those with Memory Loss to the data set
+- Use Convolutional Neural Network Rather than MLP to possibly improve Model accuracy
+- Create a data pipeline for uploading new Audio data into the model quickly
+- Shuffle videos during the labeling process to remove possible bias
 
-Hopefuly the model will be used within Devaworld at some point.
-Currently there is further work to be done on the App before implementing the model.
+Mentia is planning on using our S.E.R. algorithm as part of their dialog model to be implemented into Julie. It is Mentia's plan to incorporate speech to text, computer vision, and our S.E.R. algorithm into Julie.
 
-** What work is left to be done? **
+## Conclusion
 
-Collecting more represtnative data, further testing, and deploying as web app to test from anywhere.
+During this project we got gained valuable experience implementing the full Machine Learning Life Cycle. We started with a problem: can we predict positive, negative and neutral emotions for patients with memory loss. We collected, labeled audio samples and extracted MFCC, Chroma, and MFS features from these samples. We iterated through multiple Random Forrest, KNN and MLP models until we achieved our best model the MLP Neural Network with 87.5% accuracy.
 
-** Will this work be relevant in short/medium/long term? **
-
-If / When the model is in production this will become more clear. The model could
-definately be improved by the step above.
-
+With the model we built, Mentia can implement S.E.R. into their dialog model for Julie inside DevaWorld, creating a more engaging digital experience.
 
 
 """
 )
 
+st.write(
+"""
+## References:
+- [1] https://acl.gov/aging-and-disability-in-america/data-and-research/projected-future-growth-older-population
+- [2] https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6195406/
+- [3] https://www.sciencedirect.com/science/article/abs/pii/S1214021X15300387
+- [4] https://librosa.org/doc/
+- [5] https://en.wikipedia.org/wiki/Chroma_feature
+- [6] https://www.kaggle.com/shivamburnwal/speech-emotion-recognition
 
-st.write(matrix.head())
+"""
 
-st.write("""# Mentia SER Algorithm
-## Use the button below to record an audio clip.
-""")
+
+)
+
+
+# st.write(matrix.head())
+
+# st.write("""# Mentia SER Algorithm
+# ## Use the button below to record an audio clip.
+# """)
 
 
 
