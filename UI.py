@@ -114,7 +114,7 @@ if t:
 
 
 st.write("""
-# Introduction:
+# Introduction
 
 Speech is a vital way to express one's emotions, needs and thoughts. The ability to speak coherently becomes increasingly challenging for people that are experiencing this heartbreaking cognitive impairment. As a result, memory loss can cause stress to not only the patient but also to their family and their caregivers.
 
@@ -334,7 +334,7 @@ with st.echo():
 st.write(
 """
 
-## Mel Frequency Spectrogram:
+## Mel Frequency Spectrogram
 
 [https://medium.com/analytics-vidhya/understanding-the-mel-spectrogram-fca2afa2ce53](https://medium.com/analytics-vidhya/understanding-the-mel-spectrogram-fca2afa2ce53)
 
@@ -814,7 +814,7 @@ with st.echo():
 
     # Get the classification accuracy on the test set
 
-    st.write(""" ## Model Results: """)
+    st.write(""" ## Model Results: 87.5% Accuracy""")
     st.write(sum(Y_test ==  y_pred) / len(y_pred))
 
 # Creating a confusion matrix for MLP Classifier
