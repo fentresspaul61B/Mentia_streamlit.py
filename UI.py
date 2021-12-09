@@ -65,7 +65,7 @@ st.set_page_config(page_title="SER Mentia", page_icon = '🎙️')
 
 st.write(
 """
-# Fall 2021 UC Berkeley Data Discovery Project: Building a Speech Emotion Recognition Algorithm For People With Memory Loss
+# Fall 2021 UC Berkeley Data Discovery Project: Building a Speech Emotion Recognition Algorithm For People With Dementia
 
 Authors: Paul Fentress, Chi Hoang"""
 )
@@ -116,7 +116,7 @@ if t:
 st.write("""
 # Introduction
 
-Speech is a vital way to express one's emotions, needs and thoughts. The ability to speak coherently becomes increasingly challenging for people that are experiencing this heartbreaking cognitive impairment. As a result, memory loss can cause stress to not only the patient but also to their family and their caregivers.
+Speech is a vital way to express one's emotions, needs and thoughts. The ability to speak coherently becomes increasingly challenging for people that are experiencing this heartbreaking cognitive impairment. As a result, Dementia can cause stress to not only the patient but also to their family and their caregivers.
 
 "Since 1900, the percentage of Americans age 65 and older nearly quadrupled (from 4.1% in 1900 to 16% in 2019), and the number increased more than 17 times (from 3.1 million to 54.1 million)." [https://acl.gov/aging-and-disability-in-america/data-and-research/projected-future-growth-older-population](https://acl.gov/aging-and-disability-in-america/data-and-research/projected-future-growth-older-population) Dementia appears commonly in between the ages of 65 and onward and is usually chronic, dysfunctional, and secondary to neurodegenerative processes for which there is currently no cure. ([https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6195406/](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6195406/)). Speech impairment is one of the most common struggles that patients with dementia, unfortunately, have to face. ([https://www.sciencedirect.com/science/article/abs/pii/S1214021X15300387](https://www.sciencedirect.com/science/article/abs/pii/S1214021X15300387)).
 
@@ -124,7 +124,7 @@ In a world where those with cognitive impairments are often misunderstood or ign
 
 ## What is DevaWorld?
 
-Mentia's signature project DevaWorld is currently the leading technology of digital therapy for those with Dementia, Memory loss, or who are Cognitively Impaired.  DevaWorld is an interactive virtual world that is accessed through an app and played on an Ipad with the assistance of a caregiver. Inside DevaWorld, the user is guided through different options such as playing the piano, watering plants, or eating virtual chocolates with the avatar Julie.
+Mentia's signature project DevaWorld is currently the leading technology of digital therapy for those with Dementia, Dementia, or who are Cognitively Impaired.  DevaWorld is an interactive virtual world that is accessed through an app and played on an Ipad with the assistance of a caregiver. Inside DevaWorld, the user is guided through different options such as playing the piano, watering plants, or eating virtual chocolates with the avatar Julie.
 
 """
 )
@@ -135,7 +135,7 @@ st.image(julie,width=100, caption = "In Game Avatar Julie")
 
 st.write(
 """
-One of the most frustrating parts of memory loss is losing one's sense of autonomy and accomplishment. DevaWorld is a source of therapeutic entertainment that restores these things.  Currently, DevaWorld is always played with a caregiver; however, by implementing AI into Julie, DevaWorld will be playable without the assistance of a caregiver so they can focus on more important tasks.
+One of the most frustrating parts of Dementia is losing one's sense of autonomy and accomplishment. DevaWorld is a source of therapeutic entertainment that restores these things.  Currently, DevaWorld is always played with a caregiver; however, by implementing AI into Julie, DevaWorld will be playable without the assistance of a caregiver so they can focus on more important tasks.
 
 """
 
@@ -211,7 +211,7 @@ Collected data came from multiple sources:
 - Tess: SER data set from Kaggle (1527 Samples, Speakers: 2)
 - Ravdness: SER data set from Kaggle (763 Samples, Speakers: 24)
 - Savee: SER data set from Kaggle (286 Samples, Speakers: 4)
-- There are 37 total speakers in the training data set and only 13 different speakers for people elderly people or people with Memory Loss
+- There are 37 total speakers in the training data set and only 13 different speakers for people elderly people or people with Dementia
 - 50% of the Training data comes from the Tess dataset (1527 samples)
 - Only one language included: English
 
@@ -279,9 +279,9 @@ With that being said, this labeling process is inherently a very subjective task
 
 ## Issues With The data and Our Solutions
 
-One of the issues we had was collecting a sufficient amount of representative data to train on. We were given 172 videos to use, which were recordings of People with Memory Loss playing DevaWorld, and them speaking their opinion on changes that were going to be added to the game. Mentia's lead scientist was conducting the interview, and guiding the people with Memory Loss through the DevaWorld. Due to the videos being two or more people, isolate the samples where the person with Memory loss was speaking, not the scientist performing the interview. The process of converting the video to audio, splitting the audio into samples to isolate the correct speaker, then labeling the samples was cumbersome.
+One of the issues we had was collecting a sufficient amount of representative data to train on. We were given 172 videos to use, which were recordings of People with Dementia playing DevaWorld, and them speaking their opinion on changes that were going to be added to the game. Mentia's lead scientist was conducting the interview, and guiding the people with Dementia through the DevaWorld. Due to the videos being two or more people, isolate the samples where the person with Dementia was speaking, not the scientist performing the interview. The process of converting the video to audio, splitting the audio into samples to isolate the correct speaker, then labeling the samples was cumbersome.
 
-In order to overcome this, we sought out other data sets that were pre-labeled. A limitation of doing this is that we were including audio samples of people without memory loss, and therefore our dataset, was not the ideal representation for this problem. With more time cold emailing other researchers, we could create a more representative data set with more elderly people, and people with memory loss to create the ideal training data set. Furthermore, adding a wide range of different people, at different stages of memory loss, with multiple languages would
+In order to overcome this, we sought out other data sets that were pre-labeled. A limitation of doing this is that we were including audio samples of people without Dementia, and therefore our dataset, was not the ideal representation for this problem. With more time cold emailing other researchers, we could create a more representative data set with more elderly people, and people with Dementia to create the ideal training data set. Furthermore, adding a wide range of different people, at different stages of Dementia, with multiple languages would
 create a more representative data set.
 
 We have a lot of noise in the Devaworld samples, for example, there are often multiple voices in the samples, or music playing from the Devaworld app. Additionally, Julie, the avatar in Devaworld, is speaking at the same time as the people playing Devaworld. The video quality of the Mentia Videos is relatively low compared to the other samples, therefore there is a lot of white noise in the samples from Mentia. In order to deal with the white noise, we used a noise reduction python package; however, we have not yet dealt with isolating a single voice from a group, which means the model could give poor results when trying to classify a sample where two people are talking over each other.
@@ -883,7 +883,7 @@ st.write("""
 
 We have a model that performs relatively well on the test set; however, there is more to improve the model. Some of the ways the model could be improved are:
 
-- Add more representative samples of those with Memory Loss to the data set
+- Add more representative samples of those with Dementia to the data set
 - Use Convolutional Neural Network Rather than MLP to possibly improve Model accuracy
 - Create a data pipeline for uploading new Audio data into the model quickly
 - Shuffle videos during the labeling process to remove possible bias
@@ -892,7 +892,7 @@ Mentia is planning on using our S.E.R. algorithm as part of their dialog model t
 
 ## Conclusion
 
-During this project we got gained valuable experience implementing the full Machine Learning Life Cycle. We started with a problem: can we predict positive, negative and neutral emotions for patients with memory loss. We collected, labeled audio samples and extracted MFCC, Chroma, and MFS features from these samples. We iterated through multiple Random Forrest, KNN and MLP models until we achieved our best model the MLP Neural Network with 87.5% accuracy.
+During this project we got gained valuable experience implementing the full Machine Learning Life Cycle. We started with a problem: can we predict positive, negative and neutral emotions for patients with Dementia. We collected, labeled audio samples and extracted MFCC, Chroma, and MFS features from these samples. We iterated through multiple Random Forrest, KNN and MLP models until we achieved our best model the MLP Neural Network with 87.5% accuracy.
 
 With the model we built, Mentia can implement S.E.R. into their dialog model for Julie inside DevaWorld, creating a more engaging digital experience.
 
